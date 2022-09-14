@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -186,6 +187,24 @@
               // reduce price variable
 
               price -= option.price;
+            }
+          }
+
+          /* find image */
+
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+
+          /* check if image is found */
+
+          if(optionImage) {
+
+            /* hide/show photo */
+
+            if (formData[paramId] && formData[paramId].includes(optionId)){
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+            else {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
