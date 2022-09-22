@@ -445,7 +445,7 @@
     update() {
       const thisCart = this;
 
-      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let deliveryFee = settings.cart.defaultDeliveryFee;
       let totalNumber = 0;
       let subtotalPrice = 0;
       let totalPrice = 0;
@@ -455,11 +455,12 @@
         subtotalPrice += product.price;
       }
 
-      if(thisCart.subtotalPrice != 0) {
-        totalPrice = subtotalPrice + deliveryFee;
-      } else {
-        totalPrice = 0;
+      if(totalNumber == 0) {
+        deliveryFee = 0;
       }
+
+      thisCart.totalPrice = deliveryFee + subtotalPrice;
+      totalPrice = thisCart.totalPrice;
 
       console.log('totalNumber: ', totalNumber, 'subtotalPrice: ', subtotalPrice);
 
