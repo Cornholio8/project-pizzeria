@@ -45,6 +45,10 @@ export const select = {
     tables: '.floor-plan .table',
     allTables: '.floor-plan',
     bookedTable: '.table.selected',
+    phone: '[name="phone"]',
+    address: '[name="address"]',
+    bookButton: '.booking-form',
+    starters: '.checkbox',
   },
   nav: {
     links: '.main-nav a',
