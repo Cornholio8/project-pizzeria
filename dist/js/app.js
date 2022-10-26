@@ -2,6 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Home from './components/Home.js';
 
 export const app = {
   initPages: function(){
@@ -49,7 +50,7 @@ export const app = {
     /* add class "active" to matching pages, remove from non-matching */
 
     for(let page of thisApp.pages){
-      page.classList.toggle(classNames.pages.active, page.id ==pageId);
+      page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
 
     /* add class "active" to matching links, remove from non-matching */
@@ -104,6 +105,8 @@ export const app = {
     //console.log('templates:', templates);
       
     thisApp.initPages();
+
+    thisApp.initHome();
     
     thisApp.initData();
     
@@ -129,6 +132,28 @@ export const app = {
     const widgetWrapper = document.querySelector(select.containerOf.booking);
 
     this.booking = new Booking(widgetWrapper);
+  },
+
+  initHome: function(){
+    const thisApp = this;
+
+    thisApp.widgetContainer = document.querySelector(select.containerOf.home);
+    thisApp.home = new Home(thisApp.widgetContainer);
+
+    thisApp.redirectLinks = document.querySelectorAll(select.nav.redirect);
+
+    for (let link of thisApp.redirectLinks) {
+      link.addEventListener('click', function (event) {
+        const clickedElement = this;
+        event.preventDefault();
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        thisApp.activatePage(id);
+
+        window.location.hash = '#/' + id;
+      });
+    }
   }
 };
 
